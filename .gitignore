@@ -40,3 +40,4 @@ vignettes/*.pdf
 
 # Project specific files and folders
 datafiles-raw/
+Plots/

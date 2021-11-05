@@ -41,3 +41,6 @@ vignettes/*.pdf
 # Project specific files and folders
 datafiles-raw/
 Plots/
+## Dev archive files
+appArchive/
+rArchive/

@@ -3,7 +3,7 @@
 # Define UI for dataset viewer application
 shinyUI(
   dashboardPage(title = "Flinders University Storage",
-    dashboardHeader(title = logo_grey_light, titleWidth = 250),
+    dashboardHeader(title = logo_grey_light, titleWidth = 300),
     dashboardSidebar(
       collapsed = T,
       width = 200,
@@ -54,13 +54,14 @@ shinyUI(
         
         tabBox(
           title = "", width = 6,
-          id = "tabset1",
-          tabPanel("Sample Size × Lift"),
-          tabPanel("Running Lift")
+          id = "dataPlot",
+          tabPanel("HistoryScatter", plotOutput("historyscatter") %>% withSpinner(type = 5)),
+          tabPanel("HistoryLine", plotlyOutput("historyline") %>% withSpinner(type = 5)),
+          tabPanel("HistoryHeat", plotlyOutput("historyheat") %>% withSpinner(type = 5))
         ),
         
         tabBox(title = "", width = 6, 
-               id = "tabset2",
+               id = "PCA",
                tabPanel("Reject region and Power"),
                tabPanel("Probability Mass Function")
         )
@@ -71,24 +72,5 @@ shinyUI(
        )
       )
     ),
-
-  # Application title
-  # headerPanel("Flinders University Storage"),
-  
-  # Sidebar with controls to select a dataset and specify the number
-  # of observations to view
-  # sidebarPanel(
-  #  selectInput("dataset", "Choose a dataset:", 
-  #              choices = c("rock", "pressure", "cars")),
-  #   numericInput("obs", "Number of observations to view:", 10)
-  # ),
-  # 
-  # # Show a summary of the dataset and an HTML table with the requested
-  # # number of observations
-  # mainPanel(
-  #   verbatimTextOutput("summary"),
-  #   
-  #   tableOutput("view")
-  # )
  )
 )

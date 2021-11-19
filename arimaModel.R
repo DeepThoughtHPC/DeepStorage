@@ -73,12 +73,20 @@ fit <- auto.arima(train)
 refit <- Arima(tsData, model=fit)
 fc <- fitted(refit)[13]
 
-# function
-far1 <- function(x, h) {
-  forecast( Arima(x, order=c(1,1,1), seasonal = list(order = c(1,0,0), period = h), method="ML") )
+# function arimaForecast
+#' Establish a prediction based on ARIMA algorithm
+#'
+#' @param tsInput A time series dataset
+#' @param h A time period
+#'
+#' @export
+#' @examples
+
+arimaForecast <- function(tsInput, h) {
+  forecast( Arima(tsInput, order=c(1,1,1), seasonal = list(order = c(1,0,0), period = h), method="ML") )
 }
 
-pred <- far1(tsData, h=12)
+pred <- arimaForecast(tsData, h=12)
 plot (pred)
 
 

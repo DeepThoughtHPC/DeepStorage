@@ -19,6 +19,7 @@ shinyUI(
         menuItem("Github", icon = icon("github"), href = "https://github.com/DeepThoughtHPC/DeepStorage"),
         menuItem("RStudio Cloud", icon = icon("cloud"), href = "https://rstudio.cloud/"),
         menuItem("shinyapps.io", icon = icon("external-link-square-alt"), href = "https://okiyuki.shinyapps.io/ShinyAB"),
+        menuItem("Documentation", icon = icon("file"), tabName = "menu_doc"),
         menuItem("About", icon = icon("question-circle"), tabName = "menu_about")
       )
     ),
@@ -99,6 +100,14 @@ shinyUI(
         tabItem(tabName = "menu_about",
               includeMarkdown("docs/about.md")
         ),
+        
+        ## -----------------------------------
+        #  DashBoard - Docu
+        ## -----------------------------------
+        
+        tabItem(tabName = "menu_doc",
+                includeMarkdown("docs/docu.md")
+        ),
       
         ## -----------------------------------
         #  DashBoard - Prediction Tab
@@ -165,6 +174,7 @@ shinyUI(
         tabItem(tabName = "menu_finance",
                includeMarkdown("docs/about.md")
         )
+        
       )
     )
  )

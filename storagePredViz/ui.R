@@ -30,6 +30,7 @@ shinyUI(
     dashboardBody(
       theme_grey_light,
       tabItems(
+
         
         ## -----------------------------------
         #  DashBoard - History Tab
@@ -40,6 +41,7 @@ shinyUI(
             box(title = "Parameters", width = 12, solidHeader = T, status = "primary",
               fluidRow(
                 column(4, 
+
                      p(HTML("<b>Time Frame</b>"),span(shiny::icon("info-circle"), id = "info_tf"), dateRangeInput('tf', NULL, start = "2019-09-01")),
                        tippy::tippy_this(elementId = "info_tf",tooltip = "define the time frame for visulization",placement = "right")
                      )
@@ -48,25 +50,40 @@ shinyUI(
                      p(HTML("<b>Accuracy</b>"),span(shiny::icon("info-circle"), id = "info_acc"), selectInput('acc', NULL, c("Daily", "Weekly", "Monthly", "Quaterly", "Annually")),
                        tippy::tippy_this(elementId = "info_acc",tooltip = "define granulality for visulization'",placement = "right")
                      )
-                ),
-                column(4, 
-                     p(HTML("<b>New Files</b>"),span(shiny::icon("info-circle"), id = "info_file"), fileInput('file', NULL, buttonLabel = "Choose File")),
-                       tippy::tippy_this(elementId = "info_file",tooltip = "choose custom time series data",placement = "right")
-                ),
-            )
-          ),
+                )
+            ),
         
-        # box(title = "Updater", width = 3, solidHeader = T, status = "primary", 
-        #     fluidRow(
-        #       column(6, numericInput('lift', "Lift (%)", 5, min = 0.01, max = 999, step = 0.01)),
-        #       column(6, actionButton("btn_cal", "Update 'To Be'"))
-        #     ),
-        #     column(12, hr()),
-        #     fluidRow(
-        #       column(6, numericInput('number_of_comparison', "Number of Comparison", 1, step = 1)),
-        #       column(6, actionButton("btn_com", "Update 'α'"))
-        #     )
-        # ),
+          box(title = "Model Trainer", width = 6, solidHeader = T, status = "primary",
+            column(3, 
+               p(HTML("<b>New Files</b>"),span(shiny::icon("info-circle"), id = "info_file"), fileInput('file', NULL, buttonLabel = "Choose File")),
+                  tippy::tippy_this(elementId = "info_file",tooltip = "choose custom time series data",placement = "right")
+            ),
+            # fluidRow(
+            #   column(6, numericInput('lift', "Lift (%)", 5, min = 0.01, max = 999, step = 0.01)),
+            #   column(6, actionButton("btn_cal", "Update 'To Be'"))
+            # ),
+            # column(12, hr()),
+            # fluidRow(
+            #   column(6, numericInput('number_of_comparison', "Number of Comparison", 1, step = 1)),
+            #   column(6, actionButton("btn_com", "Update 'α'"))
+            #)
+            
+            column(3,
+                   p(HTML("<b>Algorithms</b>"),span(shiny::icon("info-circle"), id = "info_acc"), 
+                     radioButtons('acc', "Prediction Algorithms", c("ARIMA", "LSTM", "LSTM-DNN")),
+                     tippy::tippy_this(elementId = "info_acc",tooltip = "select of prediction algorithms here",placement = "right")
+                   )
+            ),
+            
+            column(6, 
+                   p(HTML("<b>Start Actions</b>"), span(shiny::icon("info-circle"), id = "info_act"), 
+                     submitButton("Start Model Training"),
+                     tippy::tippy_this(elementId = "info_act",tooltip = "submit the selected parameters and start model training",placement = "right")
+                   )
+            ),
+            
+          ),
+        ),
         
           tabBox(
             title = "Hist", width = 6,

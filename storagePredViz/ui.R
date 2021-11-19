@@ -14,7 +14,7 @@ shinyUI(
       
       sidebarMenu(
         menuItem("History", icon = icon("layer-group"), tabName = "menu_top"),
-        menuItem("Forcast", icon = icon("eye"), tabName = "menu_forecast"),
+        menuItem("Forcast", icon = icon("eye"), tabName = "menu_forecast", selected = TRUE),
         menuItem("Finance", icon = icon("hand-holding-usd"), tabName = "menu_finance"),
         menuItem("Github", icon = icon("github"), href = "https://github.com/DeepThoughtHPC/DeepStorage"),
         menuItem("RStudio Cloud", icon = icon("cloud"), href = "https://rstudio.cloud/"),
@@ -58,15 +58,6 @@ shinyUI(
                p(HTML("<b>New Files</b>"),span(shiny::icon("info-circle"), id = "info_file"), fileInput('file', NULL, buttonLabel = "Choose File")),
                   tippy::tippy_this(elementId = "info_file",tooltip = "choose custom time series data",placement = "right")
             ),
-            # fluidRow(
-            #   column(6, numericInput('lift', "Lift (%)", 5, min = 0.01, max = 999, step = 0.01)),
-            #   column(6, actionButton("btn_cal", "Update 'To Be'"))
-            # ),
-            # column(12, hr()),
-            # fluidRow(
-            #   column(6, numericInput('number_of_comparison', "Number of Comparison", 1, step = 1)),
-            #   column(6, actionButton("btn_com", "Update 'α'"))
-            #)
             
             column(3,
                    p(HTML("<b>Algorithms</b>"),span(shiny::icon("info-circle"), id = "info_acc"), 
@@ -134,6 +125,17 @@ shinyUI(
                     tippy::tippy_this(elementId = "info_act",tooltip = "submit the selected parameters and start the analysis",placement = "right")
                   )
               ),
+              
+              # fluidRow(
+              #   column(6, numericInput('lift', "Lift (%)", 5, min = 0.01, max = 999, step = 0.01)),
+              #   column(6, actionButton("btn_cal", "Update 'To Be'"))
+              # ),
+              # column(12, hr()),
+              # fluidRow(
+              #   column(6, numericInput('number_of_comparison', "Number of Comparison", 1, step = 1)),
+              #   column(6, actionButton("btn_com", "Update 'α'"))
+              #)
+              
             ),
             
             ## ------------------

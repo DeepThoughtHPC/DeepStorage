@@ -53,17 +53,18 @@ shinyUI(
         # ),
         
         tabBox(
-          title = "", width = 6,
+          title = "Hist", width = 6,
           id = "dataPlot",
           tabPanel("HistoryScatter", plotOutput("historyscatter") %>% withSpinner(type = 5)),
-          tabPanel("HistoryLine", plotlyOutput("historyline") %>% withSpinner(type = 5)),
-          tabPanel("HistoryHeat", plotlyOutput("historyheat") %>% withSpinner(type = 5))
+          tabPanel("Historystream", plotlyOutput("historystream") %>% withSpinner(type = 5)),
+          tabPanel("Historyrange", plotlyOutput("historyrange") %>% withSpinner(type = 5)),
         ),
         
-        tabBox(title = "", width = 6, 
-               id = "PCA",
-               tabPanel("Reject region and Power"),
-               tabPanel("Probability Mass Function")
+        tabBox(title = "PCA", width = 6, 
+               id = "HisPCA",
+               tabPanel("PCAseason", plotOutput("historyseason") %>% withSpinner(type = 5)),
+               tabPanel("PCAtrend", plotOutput("historytrend") %>% withSpinner(type = 5)),
+               tabPanel("PCArandom", plotOutput("historyrandom") %>% withSpinner(type = 5)),
         )
        ),
       

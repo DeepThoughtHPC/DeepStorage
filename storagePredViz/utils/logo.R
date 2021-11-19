@@ -30,5 +30,5 @@ logo_grey_light <- shinyDashboardLogoDIY(
   ,badgeTextColor = "white"
   ,badgeTextSize = 2
   ,badgeBackColor = "rgb(150,150,150)"
-  ,badgeBorderRadius = 3
+  ,badgeBorderRadius = 4
 )

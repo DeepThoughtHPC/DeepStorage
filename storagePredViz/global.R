@@ -7,6 +7,9 @@ library(htmltools)
 library(kableExtra)
 library(markdown)
 
+library(plotly)
+library(ggplot2)
+
 ## dev 
 setwd("\\\\userqr/q/qiao0015/Downloads/debug/DeepStorage")
 

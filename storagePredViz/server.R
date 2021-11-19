@@ -48,4 +48,10 @@ shinyServer(function(input, output, session) {
     plot(ddataDump$random)
   })  
   
+  # -------------------------
+  # Output: Historical Plots
+  # -------------------------
+  output$pred_plot <- renderPlot({
+    plot(pred)
+  })
 })

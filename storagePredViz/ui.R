@@ -115,15 +115,23 @@ shinyUI(
               ),
               column(4,
                   p(HTML("<b>Algorithms</b>"),span(shiny::icon("info-circle"), id = "info_acc"), 
-                    radioButtons('acc', "Prediction Algorithms", c("ARIMA", "LSTM", "LSTM-DNN")),
+                    radioButtons('acc', "Prediction Algorithms:", c("ARIMA", "LSTM", "LSTM-DNN")),
                     tippy::tippy_this(elementId = "info_acc",tooltip = "select of prediction algorithms here",placement = "right")
                   )
               ),
-              column(5, 
+              column(4,
+                     p(HTML("<b>Options</b>"),span(shiny::icon("info-circle"), id = "info_acc"), 
+                       radioButtons('acc', "Update Options:", c("Rolling updates", "Step updates")),
+                       tippy::tippy_this(elementId = "info_acc",tooltip = "select more granular options for predictions",placement = "right")
+                     )
+              ),
+              column(4,
+                fluidRow(
                   p(HTML("<b>Start Actions</b>"), span(shiny::icon("info-circle"), id = "info_act"), 
                     submitButton("Start Analysis"),
                     tippy::tippy_this(elementId = "info_act",tooltip = "submit the selected parameters and start the analysis",placement = "right")
                   )
+                )
               ),
               
               # fluidRow(

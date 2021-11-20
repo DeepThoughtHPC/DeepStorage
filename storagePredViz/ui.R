@@ -14,11 +14,12 @@ shinyUI(
       
       sidebarMenu(
         menuItem("History", icon = icon("layer-group"), tabName = "menu_top"),
-        menuItem("Forcast", icon = icon("eye"), tabName = "menu_forecast", selected = TRUE),
-        menuItem("Finance", icon = icon("hand-holding-usd"), tabName = "menu_finance"),
+        menuItem("Forcast", icon = icon("eye"), tabName = "menu_forecast"),
+        menuItem("Finance", icon = icon("hand-holding-usd"), tabName = "menu_finance", selected = TRUE),
         menuItem("Github", icon = icon("github"), href = "https://github.com/DeepThoughtHPC/DeepStorage"),
         menuItem("RStudio Cloud", icon = icon("cloud"), href = "https://rstudio.cloud/"),
         menuItem("shinyapps.io", icon = icon("external-link-square-alt"), href = "https://okiyuki.shinyapps.io/ShinyAB"),
+        menuItem("Documentation", icon = icon("file"), tabName = "menu_doc"),
         menuItem("About", icon = icon("question-circle"), tabName = "menu_about")
       )
     ),
@@ -99,6 +100,14 @@ shinyUI(
         tabItem(tabName = "menu_about",
               includeMarkdown("docs/about.md")
         ),
+        
+        ## -----------------------------------
+        #  DashBoard - Docu
+        ## -----------------------------------
+        
+        tabItem(tabName = "menu_doc",
+                includeMarkdown("docs/docu.md")
+        ),
       
         ## -----------------------------------
         #  DashBoard - Prediction Tab
@@ -133,17 +142,6 @@ shinyUI(
                   )
                 )
               ),
-              
-              # fluidRow(
-              #   column(6, numericInput('lift', "Lift (%)", 5, min = 0.01, max = 999, step = 0.01)),
-              #   column(6, actionButton("btn_cal", "Update 'To Be'"))
-              # ),
-              # column(12, hr()),
-              # fluidRow(
-              #   column(6, numericInput('number_of_comparison', "Number of Comparison", 1, step = 1)),
-              #   column(6, actionButton("btn_com", "Update 'α'"))
-              #)
-              
             ),
             
             ## ------------------
@@ -163,8 +161,60 @@ shinyUI(
         ## -----------------------------------
       
         tabItem(tabName = "menu_finance",
-               includeMarkdown("docs/about.md")
+          fluidRow(
+            box(title = "Financial Parameters", width = 12, solidHeader = T, status = "primary",
+              fluidRow(
+                column(2, numericInput('nu_int', "Interest Rate in %", 2.5, min = 0.01, max = 15, step = 0.01)),
+                # column(6, actionButton("btn_cal", "Update 'To Be'"))
+              ),
+              
+              box(title = "Purchase Options:", width = 8, soliHeader = T, status ="success",
+                fluidRow(
+                  column(4, 
+                    p(HTML("<b>Base Cost</b>"),span(shiny::icon("info-circle"), id = "info_base"), 
+                      numericInput('nu_base', NULL, 2, step = 1)),
+                      tippy::tippy_this(elementId = "info_base",tooltip = "Base Cost in $1K unit",placement = "right")                         
+                  ),
+                  column(3, 
+                    p(HTML("<b>No.Steps</b>"),span(shiny::icon("info-circle"), id = "info_step"), 
+                           numericInput('nu_step', NULL, 2, step = 1, min = 1, max = 12)),
+                           tippy::tippy_this(elementId = "info_step",tooltip = "Number of procurement in one year",placement = "right")
+                    )                      
+                  
+                  # column(6, actionButton("btn_com", "Update 'α'"))
+                )
+              ),
+              
+              box(title = "Comparison Options:", width = 5, soliHeader = T, status ="success",
+                  fluidRow(
+                    column(4,
+                           p(HTML("<b>Options</b>"),span(shiny::icon("info-circle"), id = "info_acc"), 
+                             radioButtons('acc', "Update Options:", c("Individual", "Overlay")),
+                             tippy::tippy_this(elementId = "info_acc",tooltip = "select more granular options for predictions",placement = "right")
+                           )
+                    ),
+                  )
+              ),
+              
+              column(4,
+                fluidRow(
+                   p(HTML("<b>Actions: </b>"), span(shiny::icon("info-circle"), id = "info_fin_update"), 
+                     submitButton("update analysis parameters"),
+                     tippy::tippy_this(elementId = "info_fin_update",tooltip = "submit the selected parameters and start the finance analysis",placement = "right")
+                   )
+                ),
+                
+                fluidRow(
+                  submitButton("ANALYSIS", icon = icon("redo") )
+                ),                
+              ),
+              
+            )
+          )
         )
+        ## -----------------------------------
+        #  DashBoard - Finance Tab Finish Here
+        ## -----------------------------------
       )
     )
  )

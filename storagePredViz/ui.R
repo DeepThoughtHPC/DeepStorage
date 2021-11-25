@@ -168,19 +168,45 @@ shinyUI(
                 # column(6, actionButton("btn_cal", "Update 'To Be'"))
               ),
               
-              box(title = "Purchase Options:", width = 8, soliHeader = T, status ="success",
+              box(title = "Purchase Options:", width = 10, soliHeader = T, status ="success",
                 fluidRow(
                   column(4, 
-                    p(HTML("<b>Base Cost</b>"),span(shiny::icon("info-circle"), id = "info_base"), 
-                      numericInput('nu_base', NULL, 2, step = 1)),
-                      tippy::tippy_this(elementId = "info_base",tooltip = "Base Cost in $1K unit",placement = "right")                         
+                    fluidRow(
+                      column(12,
+                        p(HTML("<b>Base Cost</b>"),span(shiny::icon("info-circle"), id = "info_base"), 
+                          numericInput('nu_base', NULL, 2, step = 1),
+                          tippy::tippy_this(elementId = "info_base",tooltip = "Base Cost in $1K unit",placement = "right")                         
+                        )
+                      )
+                    ),
+                    fluidRow(
+                      column(12,
+                        p(HTML("<b>No.Senario</b>"),span(shiny::icon("info-circle"), id = "info_sena"), 
+                           numericInput('nu_sena', NULL, 2, step = 1),
+                           tippy::tippy_this(elementId = "info_sena",tooltip = "Number of senario is intended to analysis as a cluster",placement = "right")
+                        )
+                      )
+                    )
                   ),
-                  column(3, 
+                  column(3,
                     p(HTML("<b>No.Steps</b>"),span(shiny::icon("info-circle"), id = "info_step"), 
                            numericInput('nu_step', NULL, 2, step = 1, min = 1, max = 12)),
                            tippy::tippy_this(elementId = "info_step",tooltip = "Number of procurement in one year",placement = "right")
-                    )                      
-                  
+                  ),                
+                  column(3, 
+                      fluidRow(
+                        p(HTML("<b>Update: </b>"),span(shiny::icon("info-circle"), id = "info_fin_update_2"),     
+                          actionButton("update_fin_param", "Register Parameters", icon = icon("cash-register"), class = "btn-update"),
+                          tippy::tippy_this(elementId = "info_fin_update_2",tooltip = "To register each set of parameters for financial analysis",placement = "right")
+                        )
+                      ),
+                      fluidRow(
+                        p(HTML("<b>Reset/Restart: </b>"),span(shiny::icon("info-circle"), id = "info_acc_2"),     
+                          actionButton("reset_fin_param", "Reset parameters", icon = icon("redo"), class = "btn-reset"),
+                          tippy::tippy_this(elementId = "info_acc_2",tooltip = "To reset/restart setting parameters for financial senarios",placement = "right")
+                        )
+                      ),
+                  )
                   # column(6, actionButton("btn_com", "Update 'α'"))
                 )
               ),
@@ -198,14 +224,19 @@ shinyUI(
               
               column(4,
                 fluidRow(
-                   p(HTML("<b>Actions: </b>"), span(shiny::icon("info-circle"), id = "info_fin_update"), 
-                     submitButton("update analysis parameters"),
-                     tippy::tippy_this(elementId = "info_fin_update",tooltip = "submit the selected parameters and start the finance analysis",placement = "right")
-                   )
+                  p(HTML("<b>Updates: </b>"), span(shiny::icon("info-circle"), id = "info_fin_update"), 
+                    fluidRow(
+                      actionButton("update_fin_board_param", "update analysis parameters"),
+                    ),
+                    tippy::tippy_this(elementId = "info_fin_update",tooltip = "Update the parameters for finance analysis board",placement = "right")
+                  )
                 ),
                 
                 fluidRow(
-                  submitButton("ANALYSIS", icon = icon("redo") )
+                  p(HTML("<b>Actions: </b>"), span(shiny::icon("info-circle"), id = "info_fin_action"), 
+                    submitButton("ANALYSIS", icon = icon("sync")),
+                    tippy::tippy_this(elementId = "info_fin_action",tooltip = "submit the selected parameters and start the finance analysis",placement = "right")
+                  )
                 ),                
               ),
               

@@ -239,8 +239,28 @@ shinyUI(
                   )
                 ),                
               ),
-              
-            )
+
+            ),
+            
+            ## ------------------
+            #   Finance Plots
+            ## ------------------
+            
+            tabBox(title = "ExpenditureExplorer", width = 6, 
+                   id = "Fin_Exp",
+                   tabPanel("Exp_Year", plotOutput("fin_exp_year") %>% withSpinner(type = 5)),
+                   tabPanel("Exp_Quarter", plotOutput("fin_exp_quarter") %>% withSpinner(type = 5)),
+                   tabPanel("Exp_Compare", plotOutput("fin_exp_compare") %>% withSpinner(type = 5)),
+            ), 
+            
+            tabBox(title = "NPV", width = 6, 
+                   id = "Fin_NPV",
+                   tabPanel("NPV_Year", plotOutput("fin_exp_npv_y") %>% withSpinner(type = 5)),
+                   tabPanel("NPV_Quarter", plotOutput("fin_exp_npv_q") %>% withSpinner(type = 5)),
+                   tabPanel("NPV_Interests", plotOutput("fin_exp_npv_int") %>% withSpinner(type = 5)),
+                   tabPanel("NPV_Base", plotOutput("fin_exp_npv_base") %>% withSpinner(type = 5)),
+            )        
+            
           )
         )
         ## -----------------------------------

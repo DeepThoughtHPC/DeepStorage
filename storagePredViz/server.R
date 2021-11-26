@@ -54,4 +54,32 @@ shinyServer(function(input, output, session) {
   output$pred_plot <- renderPlot({
     plot(pred)
   })
+  
+  # -------------------------
+  # Output: Financial Plots
+  # -------------------------
+  
+  output$fin_exp_year <- renderPlot({
+    plot(plot_precure_year_step)
+  })
+  
+  output$fin_exp_quarter <- renderPlot({
+    plot(plot_precure_qt_step)
+  })
+  
+  output$fin_exp_compare <- renderPlot({
+    precureComp_plot
+  })
+    
+  output$fin_exp_npv_y <- renderPlot({
+    plot(x = seq(0.01, 0.1, 0.01), y=NPVlist)
+  })
+  
+  output$fin_exp_npv_q <- renderPlot({
+    plot(x = seq(0.01, 0.1, 0.01), y=NPVlist_Q)
+  })
+  
+  output$fin_exp_npv_int <- renderPlot({
+    NPVcompare_1
+  })
 })

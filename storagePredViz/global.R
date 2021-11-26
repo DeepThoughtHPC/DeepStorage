@@ -8,6 +8,12 @@ library(tippy)
 library(htmltools)
 library(kableExtra)
 library(markdown)
+library(zoo)
+library(data.table)
+library(xts)
+
+## financial 
+library(FinancialMath)
 
 ## model
 library(fpp)

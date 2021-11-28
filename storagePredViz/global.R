@@ -11,6 +11,8 @@ library(markdown)
 library(zoo)
 library(data.table)
 library(xts)
+library(reshape2)
+library(tidyverse)
 
 ## financial 
 library(FinancialMath)
